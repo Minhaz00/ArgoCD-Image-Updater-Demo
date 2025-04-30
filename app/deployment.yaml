@@ -3,10 +3,10 @@ kind: Deployment
 metadata:
   name: ecommerce-frontend
   annotations:
-    argocd-image-updater.argoproj.io/image-list: frontend=yourdockerhubusername/ecommerce-frontend
+    argocd-image-updater.argoproj.io/image-list: frontend=minhaz71/ecommerce-frontend
     argocd-image-updater.argoproj.io/frontend.update-strategy: semver
     argocd-image-updater.argoproj.io/frontend.allow-tags: 'regexp:^v[0-9]+\.[0-9]+\.[0-9]+$'
-    argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd-image-updater/git-creds
 spec:
   replicas: 1
   selector:
@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: yourdockerhubusername/ecommerce-frontend:v1.0.0
+        image: minhaz71/ecommerce-frontend:v1.0.0
         ports:
         - containerPort: 80
